@@ -5,4 +5,99 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div *ngIf="perroRegistrado" style="text-align: center; padding: 20px;">
+    <h2>¡Perro registrado exitosamente!</h2>
+    <p>Redirigiendo a la galería...</p>
+  </div>
+
+  <form [formGroup]="formulario" (ngSubmit)="registrarPerro()" *ngIf="!perroRegistrado">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('nombre')?.hasError('required') && formulario.get('nombre')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">El nombre es requerido</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tipo</ion-label>
+      <ion-select formControlName="tipo" [disabled]="true">
+        <ion-select-option value="Perro">Perro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Raza</ion-label>
+      <ion-input formControlName="raza" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('raza')?.hasError('required') && formulario.get('raza')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">La raza es requerida</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input formControlName="edad" type="text" placeholder="ej: 2 años"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('edad')?.hasError('required') && formulario.get('edad')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">La edad es requerida</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Sexo</ion-label>
+      <ion-select formControlName="sexo">
+        <ion-select-option value="Macho">Macho</ion-select-option>
+        <ion-select-option value="Hembra">Hembra</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('sexo')?.hasError('required') && formulario.get('sexo')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">El sexo es requerido</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tamaño</ion-label>
+      <ion-select formControlName="tamano">
+        <ion-select-option value="Pequeño">Pequeño</ion-select-option>
+        <ion-select-option value="Mediano">Mediano</ion-select-option>
+        <ion-select-option value="Grande">Grande</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('tamano')?.hasError('required') && formulario.get('tamano')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">El tamaño es requerido</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Vacunado</ion-label>
+      <ion-checkbox formControlName="vacunada" slot="start"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea formControlName="descripcion"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('descripcion')?.hasError('required') && formulario.get('descripcion')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">La descripción es requerida (mínimo 10 caracteres)</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">URL Foto</ion-label>
+      <ion-input formControlName="foto" type="url" placeholder="https://..."></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formulario.get('foto')?.hasError('required') && formulario.get('foto')?.touched" lines="none">
+      <p style="color: red; font-size: 12px;">La URL de la foto es requerida</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Adoptado</ion-label>
+      <ion-checkbox formControlName="adoptado" slot="start"></ion-checkbox>
+    </ion-item>
+
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <ion-button expand="block" type="submit" color="primary" [disabled]="!formulario.valid">
+        Registrar
+      </ion-button>
+      <ion-button expand="block" type="button" color="medium" (click)="cancelar()">
+        Cancelar
+      </ion-button>
+    </div>
+  </form>
 </ion-content>

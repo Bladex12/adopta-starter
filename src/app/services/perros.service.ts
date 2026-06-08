@@ -47,22 +47,17 @@ export class PerrosService {
       descripcion: 'Noble y paciente, excelente con niños. Un compañero fiel para toda la familia.',
       foto: 'https://placedog.net/600/600?id=5', adoptado: false,
     },
-    {
-      id: 6, nombre: 'Nina', tipo: 'Perro', raza: 'Salchicha', edad: '5 años',
-      sexo: 'Hembra', tamano: 'Pequeño', vacunada: true,
-      descripcion: 'Curiosa y regalona. Le gusta acurrucarse y seguirte por toda la casa.',
-      foto: 'https://placedog.net/600/600?id=6', adoptado: false,
-    },
   ];
 
-  todas(): Perro[] {
-    return [];
+  getPerros(): Perro[] {
+    return this.perros;
   }
 
-  obtener(id: string): Perro | undefined {
-    return undefined;
+  getPerroById(id: number): Perro | undefined {
+    return this.perros.find(perro => perro.id === id);
   }
 
-  agregar(perro: Perro): void {
+  agregarPerro(perro: Perro): void {
+    this.perros.push(perro);
   }
 }
